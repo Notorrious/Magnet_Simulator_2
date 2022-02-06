@@ -152,7 +152,7 @@ if _G.Key == getgenv().KeyCode then
     q:Button("The Desert World",function()
         p1.CFrame = The_Desert;
     end)
-    q:Button("The Desert World",function()
+    q:Button("Spawn",function()
         p1.CFrame = Spawn;
     end)
     d:Button("Upgrade Storage",function()
