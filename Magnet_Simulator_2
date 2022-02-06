@@ -131,12 +131,12 @@ if getgenv().Key == getgenv().KeyCode then
     end)
     spawn(function()
         while getgenv().anti_afk == true do
+            wait(300)
             local vu = game:GetService("VirtualUser")
             game:GetService("Players").LocalPlayer.Idled:connect(function()
             vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
             wait(1)
             vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-            wait(300)
             end)
         end
     end)
@@ -302,5 +302,5 @@ if getgenv().Key == getgenv().KeyCode then
         _G.settingsTable.walkSpeed1 = nil
     end)
 else
-print("Incorect key.  Try again!")
+print("Incorect key. Try again!")
 end
