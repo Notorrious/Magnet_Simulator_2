@@ -302,5 +302,5 @@ if getgenv().Key == getgenv().KeyCode then
         _G.settingsTable.walkSpeed1 = nil
     end)
 else
-print("Incorect key. Try again!")
+print("Incorect key.  Try again!")
 end
