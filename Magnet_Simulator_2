@@ -8,7 +8,6 @@ _G.settingsTable = {
 }
 getgenv().Key = "password123"
 getgenv().anti_afk = false
-local vu = game:GetService("VirtualUser")
 local world;
 local item;
 local Quarry_Mine = CFrame.new(887, 4, 421)
@@ -139,6 +138,7 @@ if getgenv().Key == getgenv().KeyCode then
         spawn(function()
             while getgenv().anti_afk == true do
                 wait(300)
+                local vu = game:GetService("VirtualUser")
                 game:GetService("Players").LocalPlayer.Idled:connect(function()
                 vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
                 wait(1)
