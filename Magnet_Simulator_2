@@ -1,0 +1,305 @@
+_G.settingsTable = {
+    autosell = false,
+    autoegg = false,
+    autodaily = false,
+    autodailygroup = false,
+    pref,
+    walkSpeed1,
+}
+
+local world;
+local item;
+local loc = CFrame.new(887, 4, 421)
+local loc1 = CFrame.new(-797.541687, 1.93124998, 383.812073)
+local loc2 = CFrame.new(-749.623535, 1.93124998, 351.450165)
+local loc4 = CFrame.new(-681.882751, 1.93124998, 342.399292)
+local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local playerHead = game.Players.LocalPlayer.Character.Head
+local location1 = CFrame.new(813, 4, 485)
+local directory = game:GetService("Workspace").Rings.Sellx6.Touch
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+    
+local w = library:CreateWindow("Notorious Hub") -- Creates the window
+    
+local d = w:CreateFolder("Farming")
+    
+local b = w:CreateFolder("Eggs")
+    
+local c = w:CreateFolder("Attack")
+    
+local a = w:CreateFolder("Misc")
+    
+local s = w:CreateFolder("Settings")
+    
+local e = w:CreateFolder("Destroy")
+    
+e:DestroyGui()
+    
+    
+local filename = "Magnet_Simulator_Settings.txt"
+    
+    
+function savesettings()
+    print("-saving user setting...")
+    local json;
+    local HttpService = game:GetService("HttpService")
+    if (writefile) then
+        json = HttpService:JSONEncode(_G.settingsTable)
+        writefile(filename, json)
+    else
+        print("-Unable to save settings due to your executor...")
+    end
+end
+s:Button("Save Settings",function()
+    savesettings()
+end)
+function loadsettings()
+    print("-loading settings...")
+    local HttpService = game:GetService("HttpService")
+    if (readfile and isfile and isfile(filename))then
+        _G.settingsTable = HttpService:JSONDecode(readfile(filename))
+        print("-settings loaded")
+    end
+end
+s:Button("Load Settings",function()
+    loadsettings()
+end)
+
+d:Toggle("AutoSell",function(bool)
+    _G.settingsTable.autosell = bool
+    savesettings()
+    if bool then
+        doSell1()
+    end
+end)
+b:Toggle("AutoEgg",function(bool)
+    _G.settingsTable.autoegg = bool
+    savesettings()
+    if bool then
+        doEgg()
+    end
+end) 
+a:Toggle("Auto Daily",function(bool)
+    _G.settingsTable.autodaily = bool
+    savesettings()
+    if bool then
+        doDaily1()
+   end
+end)
+ a:Toggle("Auto Group",function(bool)
+    _G.settingsTable.autodailygroup = bool
+    savesettings()
+     if bool then
+        doDailyGroup1()
+    end
+end)
+a:Box("Speed Hack(def: 32)","number",function(bal) -- "number" or "string"
+    savesettings()
+    _G.settingsTable.walkSpeed1 = bal;
+    local walkSpeed = _G.settingsTable.walkSpeed1;
+         
+         
+         
+    local gmt = getrawmetatable(game)
+         
+    setreadonly(gmt, false)
+         
+    local oldindex = gmt.__index
+         
+    gmt.__index = newcclosure(function(self,b)
+         
+    if b == "WalkSpeed" then
+         
+    return 16
+         
+    end
+         
+    return oldindex(self,b)
+         
+    end)
+         
+         
+         
+    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+end)
+    
+b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
+    savesettings()
+    _G.settingsTable.pref = val
+end)
+    
+
+d:Button("Quary Mine World",function()
+    p1.CFrame = loc;
+end)
+d:Button("Upgrade Storage",function()
+    doUpgrade1()
+end)
+d:Button("Magnet Shop",function()
+    doMagnet1()
+end)
+d:Button("Upgrade Speed",function()
+    doSpeed1()
+end)
+    
+
+function doSell1()
+        spawn(function()
+            while _G.settingsTable.autosell do
+                for i,v in pairs(game:GetService("Workspace").Rings.Sellx6:GetDescendants()) do
+                    if v.Name == "TouchInterest" then
+                        firetouchinterest(playerHead, v.Parent, 0)
+                        wait(0.1)
+                        firetouchinterest(playerHead, v.Parent, 1)
+                        wait()
+                    end
+                end
+            end
+        end)
+end
+function doEgg()
+    spawn(function()
+        while _G.settingsTable.autoegg == true
+         do
+            wait(0.25)
+            local args = {
+                [1] = _G.settingsTable.pref
+            }
+                
+            game:GetService("ReplicatedStorage").Events.GameEvents.BuyEgg:FireServer(unpack(args))
+                
+        end
+    end)
+end  
+function doUpgrade1()
+        spawn(function()
+            for i,v in pairs(game:GetService("Workspace")["_UpgradeRings"].Storage:GetDescendants()) do
+                 if v.Name == "TouchInterest" then
+                    firetouchinterest(playerHead, v.Parent, 0)
+                    wait(0.1)
+                    firetouchinterest(playerHead, v.Parent, 1)
+                    wait()
+                end
+            end
+        end)
+end
+function doMagnet1()
+        spawn(function()
+            for i,v in pairs(game:GetService("Workspace")["_UpgradeRings"].Magnet:GetDescendants()) do
+                 if v.Name == "TouchInterest" then
+                    firetouchinterest(playerHead, v.Parent, 0)
+                    wait(0.1)
+                    firetouchinterest(playerHead, v.Parent, 1)
+                    wait()
+                end
+            end
+        end)
+end
+function doSpeed1()
+        spawn(function()
+            for i,v in pairs(game:GetService("Workspace")["_UpgradeRings"].Speed:GetDescendants()) do
+                 if v.Name == "TouchInterest" then
+                    firetouchinterest(playerHead, v.Parent, 0)
+                    wait(0.1)
+                    firetouchinterest(playerHead, v.Parent, 1)
+                    wait()
+                end
+            end
+        end)
+end 
+function doDaily1()
+        spawn(function()
+            while getgenv().autodaily do
+                for i,v in pairs(game:GetService("Workspace")["_Dailys"].Daily.Ring:GetDescendants()) do
+                    if v.Name == "TouchInterest" then
+                        firetouchinterest(playerHead, v.Parent, 0)
+                        wait(10)
+                        firetouchinterest(playerHead, v.Parent, 1)
+                        wait()
+                    end
+                end
+            end
+        end)
+end
+function doDailyGroup1()
+        spawn(function()
+            while getgenv().autodailygroup do
+                for i,v in pairs(game:GetService("Workspace")["_Dailys"].GroupDaily.Ring:GetDescendants()) do
+                    if v.Name == "TouchInterest" then
+                        firetouchinterest(playerHead, v.Parent, 0)
+                        wait(10)
+                        firetouchinterest(playerHead, v.Parent, 1)
+                        wait()
+                    end
+                end
+            end
+        end)
+end
+print("-----Settings are------")
+for i, v in pairs(_G.settingsTable) do
+    print(i, v)
+end
+print("------END--------")
+
+loadsettings()
+if _G.settingsTable.autosell then
+    doSell1()
+end
+if _G.settingsTable.autoegg then
+    doEgg()
+end
+if _G.settingsTable.autodaily then
+    doDaily1()
+end
+if _G.settingsTable.autodailygroup then
+    doDailyGroup1()
+end
+print("-----Settings are------")
+for i, v in pairs(_G.settingsTable) do
+    print(i, v)
+end
+print("------END--------")
+   
+s:Button("Clear Settings Settings",function()
+    _G.settingsTable.autosell = false
+    _G.settingsTable.autoegg = false
+    _G.settingsTable.autodaily = false
+    _G.settingsTable.autodailygroup = false
+    _G.settingsTabel.pref = nil
+    _G.settingsTable.walkSpeed1 = nil
+end)
+-- c:Toggle("Auto Equip",function(bool)
+    --     getgenv().autoequipbest = bool
+    --     if bool then
+    --         game:GetService("ReplicatedStorage").Events.PetEvents.EquipBest:FireServer()
+    --         wait(6)
+    --     end
+    -- end)
+    
+    -- c:Dropdown("Choose an area",{"Spawn","Desert","Jungle","Coral","Magma","Crystal"},true,function(valor) --true/false, replaces the current title "Dropdown" with the option that t
+    --     world = valor
+    -- end)
+    
+    -- c:Dropdown("Choose Coin",{"SmallCoinStack","MediumCoinStack","BigCoinStack","SpawnChest","Safe","Desert_SmallCoinStack","Desert_MediumCoinStack","Desert_BigCoinStack","Desert_Chest","Desert_Safe","Jungle_SmallCoinStack","Jungle_MediumCoinStack","Jungle_BigCoinStack","Jungle_Chest","Jungle_Safe","Coral_SmallCoinStack","Coral_MediumCoinStack","Coral_BigCoinStack","Coral_Chest","Coral_Safe","Magma_SmallCoinStack","Magma_MediumCoinStack","Magma_BigCoinStack","Magma_Chest","Magma_Safe","Crystal_SmallCoinStack","Crystal_MediumCoinStack","Crystal_BigCoinStack","Crystal_Chest","Crystal_Safe"},true,function(valoare) --true/false, replaces the current title "Dropdown" with the option that t
+    --     item = valoare
+    -- end)
+    
+    -- c:Dropdown("Choose Coin",{"SmallCoinStack","MediumCoinStack","BigCoinStack","SpawnChest","Safe","Desert_SmallCoinStack","Desert_MediumCoinStack","Desert_BigCoinStack","Desert_Chest","Desert_Safe","Jungle_SmallCoinStack","Jungle_MediumCoinStack","Jungle_BigCoinStack","Jungle_Chest","Jungle_Safe","Coral_SmallCoinStack","Coral_MediumCoinStack","Coral_BigCoinStack","Coral_Chest","Coral_Safe","Magma_SmallCoinStack","Magma_MediumCoinStack","Magma_BigCoinStack","Magma_Chest","Magma_Safe","Crystal_SmallCoinStack","Crystal_MediumCoinStack","Crystal_BigCoinStack","Crystal_Chest","Crystal_Safe"},true,function(valoare1) --true/false, replaces the current title "Dropdown" with the option that t
+    --     item1 = valoare
+    -- end)
+    
+    -- function doSell()
+--     spawn(function()
+--         while _G.settingsTable.autosell == true 
+--         do
+--             wait(1.5)
+--             local plr = game.Players.LocalPlayer
+--             local location = plr.Character.HumanoidRootPart.CFrame
+--             local c = location
+--             p1.CFrame = location1;
+--             wait()
+--             p1.CFrame = c
+    
+--         end
+--     end)
+-- end  
