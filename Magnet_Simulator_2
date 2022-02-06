@@ -22,8 +22,7 @@ local loc4 = CFrame.new(-681.882751, 1.93124998, 342.399292)
 local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
 local playerHead = game.Players.LocalPlayer.Character.Head
 local location1 = CFrame.new(813, 4, 485)
-local directory = game:GetService("Workspace").Rings.Sellx6.Touch
-if getgenv().Key = getgenv().KeyCode then
+if getgenv().Key == getgenv().KeyCode then
     local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
     local w = library:CreateWindow("Notorious Hub") -- Creates the window
@@ -312,5 +311,5 @@ if getgenv().Key = getgenv().KeyCode then
         _G.settingsTable.walkSpeed1 = nil
     end)
 else
-print("Incorect key. Try again!")
+    print("Incorect key. Try again!")
 end
