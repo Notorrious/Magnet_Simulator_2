@@ -7,7 +7,8 @@ _G.settingsTable = {
     walkSpeed1,
 }
 getgenv().Key = "password123"
-getgenv().anti_afk = true
+getgenv().anti_afk = false
+local vu = game:GetService("VirtualUser")
 local world;
 local item;
 local Quarry_Mine = CFrame.new(887, 4, 421)
@@ -102,6 +103,11 @@ if getgenv().Key == getgenv().KeyCode then
             doDailyGroup1()
         end
     end)
+    a:Toggle("Anti Afk",function(bool)
+        getgenv().anti_afk = bool
+        if bool then
+            doNoAfkAnti()
+       end
     a:Box("Speed Hack(def: 32)","number",function(bal) -- "number" or "string"
         savesettings()
         _G.settingsTable.walkSpeed1 = bal;
@@ -129,18 +135,18 @@ if getgenv().Key == getgenv().KeyCode then
 
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
     end)
-    spawn(function()
-        while getgenv().anti_afk == true do
-            wait(300)
-            local vu = game:GetService("VirtualUser")
-            game:GetService("Players").LocalPlayer.Idled:connect(function()
-            vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-            wait(1)
-            vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-            end)
-        end
-    end)
-
+    function doNoAfkAnti()
+        spawn(function()
+            while getgenv().anti_afk == true do
+                wait(300)
+                game:GetService("Players").LocalPlayer.Idled:connect(function()
+                vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                wait(1)
+                vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                end)
+            end
+        end)
+    end
     b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.pref = val
