@@ -6,6 +6,7 @@ _G.settingsTable = {
     pref,
     walkSpeed1,
 }
+getgenv().Key = "password123"
 getgenv().anti_afk = false
 local world;
 local item;
