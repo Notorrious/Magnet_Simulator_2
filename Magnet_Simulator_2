@@ -6,7 +6,7 @@ _G.settingsTable = {
     pref,
     walkSpeed1,
 }
-getgenv().Key = "password123"
+getgenv().Key = "password123","Denis123","Slavic123"
 local world;
 local item;
 local Quarry_Mine = CFrame.new(887, 4, 421)
