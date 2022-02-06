@@ -6,7 +6,7 @@ _G.settingsTable = {
     pref,
     walkSpeed1,
 }
-getgenv().Key = "password123","Denis123","Slavic123"
+_G.Key = {"password123","Denis123","Slavic123"}
 local world;
 local item;
 local Quarry_Mine = CFrame.new(887, 4, 421)
@@ -22,7 +22,7 @@ local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
 local playerHead = game.Players.LocalPlayer.Character.Head
 local location1 = CFrame.new(813, 4, 485)
 local directory = game:GetService("Workspace").Rings.Sellx6.Touch
-if getgenv().Key == getgenv().KeyCode then
+if _G.Key == getgenv().KeyCode then
     local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
 
     local w = library:CreateWindow("Notorious Hub") -- Creates the window
