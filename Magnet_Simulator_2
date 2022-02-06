@@ -7,6 +7,7 @@ _G.settingsTable = {
     walkSpeed1,
 }
 getgenv().Key = "password123"
+getgenv().anti_afk = true
 local world;
 local item;
 local Quarry_Mine = CFrame.new(887, 4, 421)
@@ -106,6 +107,17 @@ if getgenv().Key == getgenv().KeyCode then
         _G.settingsTable.walkSpeed1 = bal;
         local walkSpeed = _G.settingsTable.walkSpeed1;
 
+    spawn(function()
+        while getgenv().anti_afk == true do
+            local vu = game:GetService("VirtualUser")
+            game:GetService("Players").LocalPlayer.Idled:connect(function()
+            vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            wait(1)
+            vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            wait(300)
+            end)
+        end
+    end)
 
 
         local gmt = getrawmetatable(game)
