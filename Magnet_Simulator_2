@@ -24,7 +24,7 @@ local playerHead = game.Players.LocalPlayer.Character.Head
 local location1 = CFrame.new(813, 4, 485)
 local directory = game:GetService("Workspace").Rings.Sellx6.Touch
 if getgenv().Key == getgenv().KeyCode then
-    local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+    local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
     local w = library:CreateWindow("Notorious Hub") -- Creates the window
 
@@ -107,19 +107,6 @@ if getgenv().Key == getgenv().KeyCode then
         _G.settingsTable.walkSpeed1 = bal;
         local walkSpeed = _G.settingsTable.walkSpeed1;
 
-    spawn(function()
-        while getgenv().anti_afk == true do
-            local vu = game:GetService("VirtualUser")
-            game:GetService("Players").LocalPlayer.Idled:connect(function()
-            vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-            wait(1)
-            vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-            wait(300)
-            end)
-        end
-    end)
-
-
         local gmt = getrawmetatable(game)
 
         setreadonly(gmt, false)
@@ -141,6 +128,17 @@ if getgenv().Key == getgenv().KeyCode then
 
 
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+    end)
+    spawn(function()
+        while getgenv().anti_afk == true do
+            local vu = game:GetService("VirtualUser")
+            game:GetService("Players").LocalPlayer.Idled:connect(function()
+            vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            wait(1)
+            vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            wait(300)
+            end)
+        end
     end)
 
     b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
@@ -164,7 +162,7 @@ if getgenv().Key == getgenv().KeyCode then
     q:Button("The Desert World",function()
         p1.CFrame = The_Desert;
     end)
-    q:Button("Spawn",function()
+    q:Button("The Desert World",function()
         p1.CFrame = Spawn;
     end)
     d:Button("Upgrade Storage",function()
@@ -306,38 +304,3 @@ if getgenv().Key == getgenv().KeyCode then
 else
 print("Incorect key. Try again!")
 end
--- c:Toggle("Auto Equip",function(bool)
-    --     getgenv().autoequipbest = bool
-    --     if bool then
-    --         game:GetService("ReplicatedStorage").Events.PetEvents.EquipBest:FireServer()
-    --         wait(6)
-    --     end
-    -- end)
-    
-    -- c:Dropdown("Choose an area",{"Spawn","Desert","Jungle","Coral","Magma","Crystal"},true,function(valor) --true/false, replaces the current title "Dropdown" with the option that t
-    --     world = valor
-    -- end)
-    
-    -- c:Dropdown("Choose Coin",{"SmallCoinStack","MediumCoinStack","BigCoinStack","SpawnChest","Safe","Desert_SmallCoinStack","Desert_MediumCoinStack","Desert_BigCoinStack","Desert_Chest","Desert_Safe","Jungle_SmallCoinStack","Jungle_MediumCoinStack","Jungle_BigCoinStack","Jungle_Chest","Jungle_Safe","Coral_SmallCoinStack","Coral_MediumCoinStack","Coral_BigCoinStack","Coral_Chest","Coral_Safe","Magma_SmallCoinStack","Magma_MediumCoinStack","Magma_BigCoinStack","Magma_Chest","Magma_Safe","Crystal_SmallCoinStack","Crystal_MediumCoinStack","Crystal_BigCoinStack","Crystal_Chest","Crystal_Safe"},true,function(valoare) --true/false, replaces the current title "Dropdown" with the option that t
-    --     item = valoare
-    -- end)
-    
-    -- c:Dropdown("Choose Coin",{"SmallCoinStack","MediumCoinStack","BigCoinStack","SpawnChest","Safe","Desert_SmallCoinStack","Desert_MediumCoinStack","Desert_BigCoinStack","Desert_Chest","Desert_Safe","Jungle_SmallCoinStack","Jungle_MediumCoinStack","Jungle_BigCoinStack","Jungle_Chest","Jungle_Safe","Coral_SmallCoinStack","Coral_MediumCoinStack","Coral_BigCoinStack","Coral_Chest","Coral_Safe","Magma_SmallCoinStack","Magma_MediumCoinStack","Magma_BigCoinStack","Magma_Chest","Magma_Safe","Crystal_SmallCoinStack","Crystal_MediumCoinStack","Crystal_BigCoinStack","Crystal_Chest","Crystal_Safe"},true,function(valoare1) --true/false, replaces the current title "Dropdown" with the option that t
-    --     item1 = valoare
-    -- end)
-    
-    -- function doSell()
---     spawn(function()
---         while _G.settingsTable.autosell == true 
---         do
---             wait(1.5)
---             local plr = game.Players.LocalPlayer
---             local location = plr.Character.HumanoidRootPart.CFrame
---             local c = location
---             p1.CFrame = location1;
---             wait()
---             p1.CFrame = c
-    
---         end
---     end)
--- end
