@@ -120,7 +120,7 @@ if getgenv().Key == getgenv().KeyCode then
         savesettings()
         _G.settingsTable.magnet_pref = magnet22
     end)
-    v:Toggle("Auto Buy Magnet Settings",function(bool)
+    v:Toggle("Auto Buy Magnet",function(bool)
         _G.settingsTable.autobuymagnet = bool
         savesettings()
          if bool then
@@ -431,7 +431,7 @@ if getgenv().Key == getgenv().KeyCode then
                 }
                 
                 game:GetService("ReplicatedStorage").Events.GameEvents.BuyMagnet:FireServer(unpack(args))
-                
+                wait(1)
             end
         end)
     end
