@@ -427,7 +427,7 @@ if getgenv().Key == getgenv().KeyCode then
         spawn(function()
             while _G.settingsTable.autobuymagnet == true do
                 local args = {
-                    [1] = magnet_pref
+                    [1] = _G.settingsTable.magnet_pref
                 }
                 
                 game:GetService("ReplicatedStorage").Events.GameEvents.BuyMagnet:FireServer(unpack(args))
