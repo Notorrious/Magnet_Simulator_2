@@ -11,16 +11,18 @@ _G.settingsTable = {
     autobuymagnet = false,
     pref,
     walkSpeed1,
-    magnet,
     magnet_pref,
+    magnet,
+
 }
 getgenv().Key = "password123"
 getgenv().anti_afk = false
 local world;
 local item;
-local The_Ice = CFrame.new(2275, 4, 468)
-local The_Graveyard = CFrame.new(2010, 4, 462)
-local The_World_2 = CFrame.new(1708, 4, 462)
+local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local Ice = CFrame.new(2275, 4, 468)
+local Graveyard = CFrame.new(2010, 4, 462)
+local Wild_West_World = CFrame.new(1708, 4, 462)
 local Quarry_Mine = CFrame.new(887, 4, 421)
 local Volcanic_Field = CFrame.new(611, 4, 418)
 local Coral_Reef = CFrame.new(311, 4 , 418)
@@ -30,7 +32,6 @@ local Spawn = CFrame.new(-588, 4, 418)
 local loc1 = CFrame.new(-797.541687, 1.93124998, 383.812073)
 local loc2 = CFrame.new(-749.623535, 1.93124998, 351.450165)
 local loc4 = CFrame.new(-681.882751, 1.93124998, 342.399292)
-local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
 local playerHead = game.Players.LocalPlayer.Character.Head
 local location1 = CFrame.new(813, 4, 485)
 if getgenv().Key == getgenv().KeyCode then
@@ -115,6 +116,10 @@ if getgenv().Key == getgenv().KeyCode then
             doDailyGroup1()
         end
     end)
+    v:Dropdown("Choose magnet buy",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
+        savesettings()
+        _G.settingsTable.magnet_pref = magnet22
+    end)
     v:Toggle("Auto Buy Magnet Settings",function(bool)
         _G.settingsTable.autobuymagnet = bool
         savesettings()
@@ -122,9 +127,9 @@ if getgenv().Key == getgenv().KeyCode then
             doAutoBuyMagnet()
         end
     end)
-    v:Dropdown("Choose magnet buy",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
+    v:Dropdown("Choose magnet ugrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
-        _G.settingsTable.magnet_pref = magnet22
+        _G.settingsTable.magnet = magnet11
     end)
     v:Toggle("Auto Upgrade Magnet Range",function(bool)
         _G.settingsTable.autoupgrademagnetrange = bool
@@ -147,10 +152,21 @@ if getgenv().Key == getgenv().KeyCode then
             doUpgradeMagnetSpeed()
         end
     end)
-    v:Dropdown("Choose magnet ugrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
+    v:Toggle("Auto Upgrade Storage",function(bool)
+        _G.settingsTable.autoupgradestorage = bool
         savesettings()
-        _G.settingsTable.magnet = magnet11
+         if bool then
+            doUpgradeStorage()
+        end
     end)
+    v:Toggle("Auto Upgrade Speed",function(bool)
+        _G.settingsTable.autoupgradespeed = bool
+        savesettings()
+         if bool then
+            doUpgradeSpeed()
+        end
+    end)
+
 
 
     a:Box("Speed Hack(def: 32)","number",function(bal) -- "number" or "string"
@@ -207,13 +223,13 @@ if getgenv().Key == getgenv().KeyCode then
 
 
     q:Button("The Ice World",function()
-        p1.CFrame = The_Ice;
+        p1.CFrame = Ice;
     end)
     q:Button("The Graveyard World",function()
-        p1.CFrame = The_Graveyard;
+        p1.CFrame = Graveyard;
     end)
-    q:Button("World 2",function()
-        p1.CFrame = The_World_2;
+    q:Button("Wild West World",function()
+        p1.CFrame = Wild_West_World;
     end)
     q:Button("Quarry Mine World",function()
         p1.CFrame = Quarry_Mine;
@@ -356,7 +372,7 @@ if getgenv().Key == getgenv().KeyCode then
         spawn(function()
             while _G.settingsTable.autoupgrademagnetrange == true do
                 local args = {
-                    [1] = magnet,
+                    [1] = _G.settingsTable.magnet,
                     [2] = "Range"
                 }
                 
@@ -369,7 +385,7 @@ if getgenv().Key == getgenv().KeyCode then
         spawn(function()
             while _G.settingsTable.autoupgrademagnetpower == true do
                 local args = {
-                    [1] = magnet,
+                    [1] = _G.settingsTable.magnet,
                     [2] = "Power"
                 }
                 
@@ -382,7 +398,7 @@ if getgenv().Key == getgenv().KeyCode then
         spawn(function()
             while _G.settingsTable.autoupgrademagnetspeed == true do
                 local args = {
-                    [1] = magnet,
+                    [1] = _G.settingsTable.magnet,
                     [2] = "Speed"
                 }
                 
@@ -455,4 +471,3 @@ if getgenv().Key == getgenv().KeyCode then
 else
     print("Incorect key. Try again!")
 end
---
