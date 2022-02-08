@@ -4,8 +4,8 @@ _G.settingsTable = {
     autodaily = false,
     autodailygroup = false,
     autoupgrademagnetrange = false,
-    autoupgradeamagnetpower = false,
-    autoupgradeamagnetspeed = false,
+    autoupgrademagnetpower = false,
+    autoupgrademagnetspeed = false,
     autoupgradestorage = false,
     autoupgradespeed = false,
     autobuymagnet = false,
@@ -467,6 +467,15 @@ if getgenv().Key == getgenv().KeyCode then
         _G.settingsTable.autodailygroup = false
         _G.settingsTabel.pref = nil
         _G.settingsTable.walkSpeed1 = nil
+        _G.settingsTable.autoupgradespeed = nil
+        _G.settingsTable.autoupgradestorage = nil
+        _G.settingsTable.autoupgrademagnetspeed = nil
+        _G.settingsTable.autoupgrademagnetpower = nil
+        _G.settingsTable.autoupgrademagnetrange = nil
+        _G.settingsTable.magnet = nil
+        _G.settingsTable.magnet_pref = nil
+        _G.settingsTable.autobuymagnet = nil
+
     end)
 else
     print("Incorect key. Try again!")
