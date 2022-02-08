@@ -3,13 +3,23 @@ _G.settingsTable = {
     autoegg = false,
     autodaily = false,
     autodailygroup = false,
+    autoupgrademagnetrange = false,
+    autoupgradeamagnetpower = false,
+    autoupgradeamagnetspeed = false,
+    autoupgradestorage = false,
+    autoupgradespeed = false,
+    autobuymagnet = false
     pref,
     walkSpeed1,
+    magnet,
+    magnet_pref,
 }
 getgenv().Key = "password123"
 getgenv().anti_afk = false
 local world;
 local item;
+local The_Graveyard = CFrame.new(2010, 76, 462)
+local The_World_2 = CFrame.new(1708, 76, 462)
 local Quarry_Mine = CFrame.new(887, 4, 421)
 local Volcanic_Field = CFrame.new(611, 4, 418)
 local Coral_Reef = CFrame.new(311, 4 , 418)
@@ -32,6 +42,8 @@ if getgenv().Key == getgenv().KeyCode then
     local b = w:CreateFolder("Eggs")
 
     local c = w:CreateFolder("Attack")
+
+    local v = w:CreateFolder("Auto Upgrade")
 
     local q = w:CreateFolder("Teleporter")
 
@@ -102,6 +114,43 @@ if getgenv().Key == getgenv().KeyCode then
             doDailyGroup1()
         end
     end)
+    v:Toggle("Auto Buy Magnet",function(bool)
+        _G.settingsTable.autobuymagnet = bool
+        savesettings()
+         if bool then
+            doAutoBuyMagnet()
+        end
+    end)
+    v:Dropdown("Choose a magnet to upgrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
+        savesettings()
+        _G.settingsTable.magnet_pref = magnet22
+    end)
+    v:Toggle("Auto Upgrade Magnet Range",function(bool)
+        _G.settingsTable.autoupgrademagnetrange = bool
+        savesettings()
+         if bool then
+            doUpgradeMagnetRange()
+        end
+    end)
+    v:Toggle("Auto Upgrade Magnet Power",function(bool)
+        _G.settingsTable.autoupgrademagnetpower = bool
+        savesettings()
+         if bool then
+            doUpgradeMagnetPower()
+        end
+    end)
+    v:Toggle("Auto Upgrade Magnet Speed",function(bool)
+        _G.settingsTable.autoupgrademagnetspeed = bool
+        savesettings()
+         if bool then
+            doUpgradeMagnetSpeed()
+        end
+    end)
+    v:Dropdown("Choose a magnet to upgrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
+        savesettings()
+        _G.settingsTable.magnet = magnet11
+    end)
+
 
     a:Box("Speed Hack(def: 32)","number",function(bal) -- "number" or "string"
         savesettings()
@@ -150,12 +199,19 @@ if getgenv().Key == getgenv().KeyCode then
             end
         end)
     end
-    b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
+    b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Wild West Egg","Graveyard Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.pref = val
     end)
 
 
+
+    q:Button("The Graveyard World",function()
+        p1.CFrame = TheGraveyard;
+    end)
+    q:Button("World 2",function()
+        p1.CFrame = The_World_2;
+    end)
     q:Button("Quarry Mine World",function()
         p1.CFrame = Quarry_Mine;
     end)
@@ -183,21 +239,37 @@ if getgenv().Key == getgenv().KeyCode then
     d:Button("Upgrade Speed",function()
         doSpeed1()
     end)
+    d:Button("Enchantments",function()
+        doEnchant1()
+    end)
+    
 
 
     function doSell1()
-            spawn(function()
-                while _G.settingsTable.autosell do
-                    for i,v in pairs(game:GetService("Workspace").Rings.Sellx6:GetDescendants()) do
-                        if v.Name == "TouchInterest" then
-                            firetouchinterest(playerHead, v.Parent, 0)
-                            wait(0.1)
-                            firetouchinterest(playerHead, v.Parent, 1)
-                            wait()
-                        end
+        spawn(function()
+            while _G.settingsTable.autosell do
+                for i,v in pairs(game:GetService("Workspace").Rings.Sellx18:GetDescendants()) do
+                    if v.Name == "TouchInterest" then
+                        firetouchinterest(playerHead, v.Parent, 0)
+                        wait(0.1)
+                        firetouchinterest(playerHead, v.Parent, 1)
+                        wait()
                     end
                 end
-            end)
+            end
+        end)
+    end
+    function doEnchant1()
+        spawn(function()
+            for i,v in pairs(game:GetService("Workspace").Rings.Enchantments:GetDescendants()) do
+                if v.Name == "TouchInterest" then
+                    firetouchinterest(playerHead, v.Parent, 0)
+                    wait(0.1)
+                    firetouchinterest(playerHead, v.Parent, 1)
+                    wait()
+                end
+            end
+        end)
     end
     function doEgg()
         spawn(function()
@@ -276,6 +348,73 @@ if getgenv().Key == getgenv().KeyCode then
                     end
                 end
             end)
+    end
+    function doUpgradeMagnetRange()
+        spawn(function()
+            while _G.settingsTable.autoupgrademagnetrange == true do
+                local args = {
+                    [1] = magnet,
+                    [2] = "Range"
+                }
+                
+                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(unpack(args))                
+                wait(1)
+            end 
+        end)
+    end
+    function doUpgradeMagnetPower()
+        spawn(function()
+            while _G.settingsTable.autoupgrademagnetpower == true do
+                local args = {
+                    [1] = magnet,
+                    [2] = "Power"
+                }
+                
+                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(unpack(args))                
+                wait(1)
+            end 
+        end)
+    end
+    function doUpgradeMagnetSpeed()
+        spawn(function()
+            while _G.settingsTable.autoupgrademagnetspeed == true do
+                local args = {
+                    [1] = magnet,
+                    [2] = "Speed"
+                }
+                
+                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(unpack(args))
+                wait(1)
+            end 
+        end)
+    end
+    function doUpgradeStorage()
+        spawn(function()
+            while _G.settingsTable.autoupgradestorage == true do
+                wait(1)
+                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeStorage:FireServer()
+            end 
+        end)
+    end
+    function doUpgradeSpeed()
+        spawn(function()
+            while _G.settingsTable.autoupgrademagnetspeed == true do
+                wait(1)
+                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeSpeed:FireServer()
+            end 
+        end)
+    end
+    function doAutoBuyMagnet()
+        spawn(function()
+            while _G.settingsTable.autobuymagnet == true do
+                local args = {
+                    [1] = magnet_pref
+                }
+                
+                game:GetService("ReplicatedStorage").Events.GameEvents.BuyMagnet:FireServer(unpack(args))
+                
+            end
+        end)
     end
     print("-----Settings are------")
     for i, v in pairs(_G.settingsTable) do
