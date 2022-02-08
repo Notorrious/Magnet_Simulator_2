@@ -205,7 +205,7 @@ if getgenv().Key == getgenv().KeyCode then
     function doNoAfkAnti()
         spawn(function()
             while getgenv().anti_afk == true do
-                wait(300)
+                wait(900)
                 local vu = game:GetService("VirtualUser")
                 game:GetService("Players").LocalPlayer.Idled:connect(function()
                 vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -216,7 +216,7 @@ if getgenv().Key == getgenv().KeyCode then
             end
         end)
     end
-    b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Wild West Egg","Graveyard Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
+    b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Wild West Egg","Graveyard Egg","Frost Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.pref = val
     end)
