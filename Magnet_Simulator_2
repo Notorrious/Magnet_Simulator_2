@@ -8,7 +8,7 @@ _G.settingsTable = {
     autoupgradeamagnetspeed = false,
     autoupgradestorage = false,
     autoupgradespeed = false,
-    autobuymagnet = false
+    autobuymagnet = false,
     pref,
     walkSpeed1,
     magnet,
@@ -114,14 +114,14 @@ if getgenv().Key == getgenv().KeyCode then
             doDailyGroup1()
         end
     end)
-    v:Toggle("Auto Buy Magnet",function(bool)
+    v:Toggle("Auto Buy Magnet Settings",function(bool)
         _G.settingsTable.autobuymagnet = bool
         savesettings()
          if bool then
             doAutoBuyMagnet()
         end
     end)
-    v:Dropdown("Choose a magnet to upgrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
+    v:Dropdown("Choose magnet buy",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.magnet_pref = magnet22
     end)
@@ -146,7 +146,7 @@ if getgenv().Key == getgenv().KeyCode then
             doUpgradeMagnetSpeed()
         end
     end)
-    v:Dropdown("Choose a magnet to upgrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
+    v:Dropdown("Choose magnet ugrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.magnet = magnet11
     end)
