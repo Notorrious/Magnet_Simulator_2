@@ -206,11 +206,11 @@ if getgenv().Key == getgenv().KeyCode then
     end)
 
 
-    q:Button("The Graveyard World",function()
-        p1.CFrame = TheGraveyard;
+    q:Button("The Ice World",function()
+        p1.CFrame = The_Ice;
     end)
     q:Button("The Graveyard World",function()
-        p1.CFrame = TheGraveyard;
+        p1.CFrame = The_Graveyard;
     end)
     q:Button("World 2",function()
         p1.CFrame = The_World_2;
