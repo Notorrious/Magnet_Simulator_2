@@ -18,8 +18,9 @@ getgenv().Key = "password123"
 getgenv().anti_afk = false
 local world;
 local item;
-local The_Graveyard = CFrame.new(2010, 76, 462)
-local The_World_2 = CFrame.new(1708, 76, 462)
+local The_Ice = CFrame.new(2275, 4, 468)
+local The_Graveyard = CFrame.new(2010, 4, 462)
+local The_World_2 = CFrame.new(1708, 4, 462)
 local Quarry_Mine = CFrame.new(887, 4, 421)
 local Volcanic_Field = CFrame.new(611, 4, 418)
 local Coral_Reef = CFrame.new(311, 4 , 418)
@@ -205,7 +206,9 @@ if getgenv().Key == getgenv().KeyCode then
     end)
 
 
-
+    q:Button("The Graveyard World",function()
+        p1.CFrame = TheGraveyard;
+    end)
     q:Button("The Graveyard World",function()
         p1.CFrame = TheGraveyard;
     end)
