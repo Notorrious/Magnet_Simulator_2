@@ -16,10 +16,13 @@ _G.settingsTable = {
 
 }
 getgenv().Key = "password123"
-getgenv().anti_afk = false
+getgenv().anti_afk = true
 local world;
 local item;
 local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local autoattack = game:GetService("Players").LocalPlayer.Gamepasses["Pet Auto Attack"]
+local Heaven = CFrame.new(2873, 4, 485.6)
+local hel = CFrame.new(2607, 4, 477)
 local Ice = CFrame.new(2275, 4, 468)
 local Graveyard = CFrame.new(2010, 4, 462)
 local Wild_West_World = CFrame.new(1708, 4, 462)
@@ -41,9 +44,11 @@ if getgenv().Key == getgenv().KeyCode then
 
     local d = w:CreateFolder("Farming")
 
+    local r = w:CreateFolder("Sections")
+
     local b = w:CreateFolder("Eggs")
 
-    local c = w:CreateFolder("Attack")
+    local c = w:CreateFolder("Gamepasses")
 
     local v = w:CreateFolder("Auto Upgrade")
 
@@ -102,32 +107,18 @@ if getgenv().Key == getgenv().KeyCode then
             doEgg()
         end
     end) 
-    a:Toggle("Auto Daily",function(bool)
-        _G.settingsTable.autodaily = bool
-        savesettings()
-        if bool then
-            doDaily1()
-       end
-    end)
-    a:Toggle("Auto Group",function(bool)
-        _G.settingsTable.autodailygroup = bool
-        savesettings()
-         if bool then
-            doDailyGroup1()
-        end
-    end)
-    v:Dropdown("Choose magnet buy",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
+    v:Dropdown("Choose magnet buy",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet","Electric Magnet","Corrupted Magnet"},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.magnet_pref = magnet22
     end)
-    v:Toggle("Auto Buy Magnet",function(bool)
+    v:Toggle("Auto Magnet Buyerr",function(bool)
         _G.settingsTable.autobuymagnet = bool
         savesettings()
          if bool then
             doAutoBuyMagnet()
         end
     end)
-    v:Dropdown("Choose magnet ugrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet",},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
+    v:Dropdown("Choose magnet upgrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet","Electric Magnet","Corrupted Magnet"},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.magnet = magnet11
     end)
@@ -166,10 +157,7 @@ if getgenv().Key == getgenv().KeyCode then
             doUpgradeSpeed()
         end
     end)
-
-
-
-    a:Box("Speed Hack(def: 32)","number",function(bal) -- "number" or "string"
+    a:Box("Speed Hack(eazy)","number",function(bal) -- "number" or "string"
         savesettings()
         _G.settingsTable.walkSpeed1 = bal;
         local walkSpeed = _G.settingsTable.walkSpeed1;
@@ -202,26 +190,53 @@ if getgenv().Key == getgenv().KeyCode then
             doNoAfkAnti()
         end
     end)
-    function doNoAfkAnti()
-        spawn(function()
-            while getgenv().anti_afk == true do
-                wait(900)
-                local vu = game:GetService("VirtualUser")
-                game:GetService("Players").LocalPlayer.Idled:connect(function()
-                vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                wait(1)
-                vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                print("-anti-afk has done the job!")
-                end)
-            end
-        end)
-    end
-    b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Wild West Egg","Graveyard Egg","Frost Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
+
+    b:Dropdown("Choose an egg",{"Common Egg","Rookie Egg","Desert Egg","Jungle Egg","Aquatic Egg","Volcanic Egg","Crystal Egg","Wild West Egg","Graveyard Egg","Frost Egg","Hell Egg","Heaven Egg","Secret Egg"},true,function(val) --true/false, replaces the current title "Dropdown" with the option that t
         savesettings()
         _G.settingsTable.pref = val
     end)
 
-
+    c:Button("Unlock Gamepass",function()
+        autoattack.Value = true
+        game:GetService("Players").UserManBest.AutoOpen.Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["x2 Money"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Lucky Eggs"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Infinite Backpack"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Skip Egg Open"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Secret Hunter"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Enchantment Luck"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses.VIP.Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["+50 Pet Storage"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["+2 Pets Equip"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["+1 Pet Equip"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Extended Range"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["x2 Coins"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.Gamepasses["Triple Egg Open"].Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.AutoOpen.Value = true
+        wait(0.01)
+        game:GetService("Players").UserManBest.AutoDelete.Value = true
+        wait(0.01)
+    end)
+    q:Button("The Heaven World",function()
+        p1.CFrame = Heaven;
+    end)
+    q:Button("The Hell World",function()
+        p1.CFrame = hel;
+    end)
     q:Button("The Ice World",function()
         p1.CFrame = Ice;
     end)
@@ -246,28 +261,50 @@ if getgenv().Key == getgenv().KeyCode then
     q:Button("The Desert World",function()
         p1.CFrame = The_Desert;
     end)
-    q:Button("The Desert World",function()
+    q:Button("The Spawn World",function()
         p1.CFrame = Spawn;
     end)
-    d:Button("Upgrade Storage",function()
-        doUpgrade1()
-    end)
-    d:Button("Magnet Shop",function()
+    r:Button("Magnet Shop",function()
         doMagnet1()
     end)
-    d:Button("Upgrade Speed",function()
+    r:Button("Upgrade Storage",function()
+        doUpgrade1()
+    end)
+    r:Button("Upgrade Speed",function()
         doSpeed1()
     end)
-    d:Button("Enchantments",function()
+    r:Button("Enchantments",function()
         doEnchant1()
     end)
     
 
 
+
+    ------------------------------------------------------------------------Functions-------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+    function doNoAfkAnti()
+        spawn(function()
+            while getgenv().anti_afk == true do
+                wait(900)
+                local vu = game:GetService("VirtualUser")
+                game:GetService("Players").LocalPlayer.Idled:connect(function()
+                vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                wait(1)
+                vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                print("-anti-afk has done the job!")
+                end)
+            end
+        end)
+    end
     function doSell1()
         spawn(function()
             while _G.settingsTable.autosell do
-                for i,v in pairs(game:GetService("Workspace").Rings.Sellx18:GetDescendants()) do
+                for i,v in pairs(game:GetService("Workspace").Rings.Sellx25:GetDescendants()) do
                     if v.Name == "TouchInterest" then
                         firetouchinterest(playerHead, v.Parent, 0)
                         wait(0.1)
@@ -435,6 +472,7 @@ if getgenv().Key == getgenv().KeyCode then
             end
         end)
     end
+    
     print("-----Settings are------")
     for i, v in pairs(_G.settingsTable) do
         print(i, v)
@@ -460,11 +498,9 @@ if getgenv().Key == getgenv().KeyCode then
     end
     print("------END--------")
 
-    s:Button("Clear Settings Settings",function()
+    s:Button("Clear Settings",function()
         _G.settingsTable.autosell = false
         _G.settingsTable.autoegg = false
-        _G.settingsTable.autodaily = false
-        _G.settingsTable.autodailygroup = false
         _G.settingsTabel.pref = nil
         _G.settingsTable.walkSpeed1 = nil
         _G.settingsTable.autoupgradespeed = nil
