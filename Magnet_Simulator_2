@@ -198,37 +198,37 @@ if getgenv().Key == getgenv().KeyCode then
 
     c:Button("Unlock Gamepass",function()
         autoattack.Value = true
-        game:GetService("Players").UserManBest.AutoOpen.Value = true
+        game:GetService("Players").LocalPLayer.AutoOpen.Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["x2 Money"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["x2 Money"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Lucky Eggs"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Lucky Eggs"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Infinite Backpack"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Infinite Backpack"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Skip Egg Open"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Skip Egg Open"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Secret Hunter"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Secret Hunter"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Enchantment Luck"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Enchantment Luck"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses.VIP.Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses.VIP.Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["+50 Pet Storage"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["+50 Pet Storage"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["+2 Pets Equip"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["+2 Pets Equip"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["+1 Pet Equip"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["+1 Pet Equip"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Extended Range"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Extended Range"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["x2 Coins"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["x2 Coins"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.Gamepasses["Triple Egg Open"].Value = true
+        game:GetService("Players").LocalPLayer.Gamepasses["Triple Egg Open"].Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.AutoOpen.Value = true
+        game:GetService("Players").LocalPLayer.AutoOpen.Value = true
         wait(0.01)
-        game:GetService("Players").UserManBest.AutoDelete.Value = true
+        game:GetService("Players").LocalPLayer.AutoDelete.Value = true
         wait(0.01)
     end)
     q:Button("The Heaven World",function()
