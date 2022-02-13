@@ -3,15 +3,13 @@ _G.settingsTable = {
     autoegg = false,
     autodaily = false,
     autodailygroup = false,
-    autoupgrademagnetrange = false,
-    autoupgrademagnetpower = false,
-    autoupgrademagnetspeed = false,
-    autoupgradestorage = false,
+    autoupgrademagnet = false,
     autoupgradespeed = false,
     autobuymagnet = false,
+    autopowerups = false,
+    autoenchant = false,
     pref,
     walkSpeed1,
-    magnet_pref,
     magnet,
 
 }
@@ -38,6 +36,11 @@ local loc2 = CFrame.new(-749.623535, 1.93124998, 351.450165)
 local loc4 = CFrame.new(-681.882751, 1.93124998, 342.399292)
 local playerHead = game.Players.LocalPlayer.Character.Head
 local location1 = CFrame.new(813, 4, 485)
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+pcall(function()
+    game.Workspace._Effects:Destroy()
+end)    
+
     local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
     local w = library:CreateWindow("Notorious Hub") -- Creates the window
@@ -100,6 +103,20 @@ local location1 = CFrame.new(813, 4, 485)
             doSell1()
         end
     end)
+    d:Toggle("Auto Collect Power Ups",function(bool)
+        _G.settingsTable.autopowerups = bool
+        savesettings()
+        if bool then
+            doCollectPowerUps()
+        end
+    end)
+    d:Toggle("Auto Enchant",function(bool)
+        _G.settingsTable.autoenchant = bool
+        savesettings()
+        if bool then
+            doAutoEnchant()
+        end
+    end)
     b:Toggle("AutoEgg",function(bool)
         _G.settingsTable.autoegg = bool
         savesettings()
@@ -107,10 +124,6 @@ local location1 = CFrame.new(813, 4, 485)
             doEgg()
         end
     end) 
-    v:Dropdown("Choose magnet buy",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet","Electric Magnet","Corrupted Magnet"},true,function(magnet22) --true/false, replaces the current title "Dropdown" with the option that t
-        savesettings()
-        _G.settingsTable.magnet_pref = magnet22
-    end)
     v:Toggle("Auto Magnet Buyerr",function(bool)
         _G.settingsTable.autobuymagnet = bool
         savesettings()
@@ -118,29 +131,11 @@ local location1 = CFrame.new(813, 4, 485)
             doAutoBuyMagnet()
         end
     end)
-    v:Dropdown("Choose magnet upgrade",{"Rusty Magnet","Leaf Magnet","Wooden Magnet","Stone Magnet","Classic Magnet","Golden Magnet","Diamond Magnet","Hydrodip Magnet","Toxic Magnet","Lightning Magnet","Rainbow Magnet","Dark Matter Magnet","Sunbeam Magnet","Omega Plasma Magnet","Stardust Nebula Magnet","Explosive Magnet","Hacker Magnet","Bling Magnet","Planetary Magnet","Electric Magnet","Corrupted Magnet"},true,function(magnet11) --true/false, replaces the current title "Dropdown" with the option that t
-        savesettings()
-        _G.settingsTable.magnet = magnet11
-    end)
-    v:Toggle("Auto Upgrade Magnet Range",function(bool)
-        _G.settingsTable.autoupgrademagnetrange = bool
+    v:Toggle("Auto Upgrade Magnet",function(bool)
+        _G.settingsTable.autoupgrademagnet = bool
         savesettings()
          if bool then
-            doUpgradeMagnetRange()
-        end
-    end)
-    v:Toggle("Auto Upgrade Magnet Power",function(bool)
-        _G.settingsTable.autoupgrademagnetpower = bool
-        savesettings()
-         if bool then
-            doUpgradeMagnetPower()
-        end
-    end)
-    v:Toggle("Auto Upgrade Magnet Speed",function(bool)
-        _G.settingsTable.autoupgrademagnetspeed = bool
-        savesettings()
-         if bool then
-            doUpgradeMagnetSpeed()
+            doUpgradeMagnet()
         end
     end)
     v:Toggle("Auto Upgrade Storage",function(bool)
@@ -157,6 +152,13 @@ local location1 = CFrame.new(813, 4, 485)
             doUpgradeSpeed()
         end
     end)
+    a:Toggle("AutoDaily",function(bool)
+        _G.settingsTable.autodaily = bool
+        savesettings()
+        if bool then
+            doDaily()
+        end
+    end) 
     a:Box("Speed Hack(eazy)","number",function(bal) -- "number" or "string"
         savesettings()
         _G.settingsTable.walkSpeed1 = bal;
@@ -196,40 +198,10 @@ local location1 = CFrame.new(813, 4, 485)
         _G.settingsTable.pref = val
     end)
 
-    c:Button("Unlock Gamepass",function()
-        autoattack.Value = true
-        game:GetService("Players").LocalPLayer.AutoOpen.Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["x2 Money"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Lucky Eggs"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Infinite Backpack"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Skip Egg Open"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Secret Hunter"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Enchantment Luck"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses.VIP.Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["+50 Pet Storage"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["+2 Pets Equip"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["+1 Pet Equip"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Extended Range"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["x2 Coins"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.Gamepasses["Triple Egg Open"].Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPLayer.AutoOpen.Value = true
-        wait(0.01)
-        game:GetService("Players").LocalPlayer.AutoDelete.Value = true
-        wait(0.01)
+    c:Button("Unlock Gamepasses",function()
+        for i, v in pairs(game:GetService("Players").LocalPlayer.Gamepasses:GetChildren()) do
+            v.Value = true
+        end
     end)
     q:Button("The Heaven World",function()
         p1.CFrame = Heaven;
@@ -338,105 +310,59 @@ local location1 = CFrame.new(813, 4, 485)
         end)
     end  
     function doUpgrade1()
-            spawn(function()
-                for i,v in pairs(game:GetService("Workspace")["_UpgradeRings"].Storage:GetDescendants()) do
-                     if v.Name == "TouchInterest" then
-                        firetouchinterest(playerHead, v.Parent, 0)
-                        wait(0.1)
-                        firetouchinterest(playerHead, v.Parent, 1)
-                        wait()
-                    end
-                end
-            end)
+        spawn(function()
+            local storage = game:GetService("Workspace")["_UpgradeRings"].Storage.Touch.TouchInterest
+            firetouchinterest(playerHead, storage.Parent, 0)
+            wait(0.1)
+            firetouchinterest(playerHead, storage.Parent, 1)
+            wait()
+        end)
     end
     function doMagnet1()
-            spawn(function()
-                for i,v in pairs(game:GetService("Workspace")["_UpgradeRings"].Magnet:GetDescendants()) do
-                     if v.Name == "TouchInterest" then
-                        firetouchinterest(playerHead, v.Parent, 0)
-                        wait(0.1)
-                        firetouchinterest(playerHead, v.Parent, 1)
-                        wait()
-                    end
-                end
-            end)
+        spawn(function()
+            local magnetupgrade = game:GetService("Workspace")["_UpgradeRings"].Magnet.Touch.TouchInterest
+            firetouchinterest(playerHead, magnetupgrade.Parent, 0)
+            wait(0.1)
+            firetouchinterest(playerHead, magnetupgrade.Parent, 1)
+            wait()
+        end)
     end
     function doSpeed1()
-            spawn(function()
-                for i,v in pairs(game:GetService("Workspace")["_UpgradeRings"].Speed:GetDescendants()) do
-                     if v.Name == "TouchInterest" then
-                        firetouchinterest(playerHead, v.Parent, 0)
-                        wait(0.1)
-                        firetouchinterest(playerHead, v.Parent, 1)
-                        wait()
-                    end
-                end
-            end)
+        spawn(function()
+            local speedupgrade = game:GetService("Workspace")["_UpgradeRings"].Speed.Touch.TouchInterest
+            firetouchinterest(playerHead, speedupgrade.Parent, 0)
+            wait(0.1)
+            firetouchinterest(playerHead, speedupgrade.Parent, 1)
+            wait()
+        end)
     end 
-    function doDaily1()
-            spawn(function()
-                while getgenv().autodaily do
-                    for i,v in pairs(game:GetService("Workspace")["_Dailys"].Daily.Ring:GetDescendants()) do
-                        if v.Name == "TouchInterest" then
-                            firetouchinterest(playerHead, v.Parent, 0)
-                            wait(10)
-                            firetouchinterest(playerHead, v.Parent, 1)
-                            wait()
-                        end
-                    end
-                end
-            end)
-    end
-    function doDailyGroup1()
-            spawn(function()
-                while getgenv().autodailygroup do
-                    for i,v in pairs(game:GetService("Workspace")["_Dailys"].GroupDaily.Ring:GetDescendants()) do
-                        if v.Name == "TouchInterest" then
-                            firetouchinterest(playerHead, v.Parent, 0)
-                            wait(10)
-                            firetouchinterest(playerHead, v.Parent, 1)
-                            wait()
-                        end
-                    end
-                end
-            end)
-    end
-    function doUpgradeMagnetRange()
+    function doDaily()
         spawn(function()
-            while _G.settingsTable.autoupgrademagnetrange == true do
-                local args = {
-                    [1] = _G.settingsTable.magnet,
-                    [2] = "Range"
-                }
-                
-                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(unpack(args))                
-                wait(1)
-            end 
+            game:GetService("Players").LocalPlayer.InGroup.Value = true
+            while getgenv().autodaily do
+                if not getgenv().autodaily then break end
+                local part1 = game:GetService("Workspace")["_Dailys"].GroupDaily.Ring.Touch.TouchInterest
+                local part2 = game:GetService("Workspace")["_Dailys"].Daily.Ring.Touch.TouchInterest
+                firetouchinterest(plr,part1.Parent,0)
+                firetouchinterest(plr,part1.Parent,1)
+                wait(2)
+                firetouchinterest(plr,part2.Parent,0)
+                firetouchinterest(plr,part2.Parent,1)
+            end
         end)
     end
-    function doUpgradeMagnetPower()
+    function doUpgradeMagnet()
         spawn(function()
-            while _G.settingsTable.autoupgrademagnetpower == true do
-                local args = {
-                    [1] = _G.settingsTable.magnet,
-                    [2] = "Power"
-                }
-                
-                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(unpack(args))                
-                wait(1)
-            end 
-        end)
-    end
-    function doUpgradeMagnetSpeed()
-        spawn(function()
-            while _G.settingsTable.autoupgrademagnetspeed == true do
-                local args = {
-                    [1] = _G.settingsTable.magnet,
-                    [2] = "Speed"
-                }
-                
-                game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(unpack(args))
-                wait(1)
+            while _G.settingsTable.autoupgrademagnet == true do
+                while wait(1) do
+                    if not _G.settingsTable.autoupgrademagnet then break end
+                    for i, v in pairs(game:GetService("Players").LocalPlayer.StarterGear:GetChildren()) do
+                            currentMagnet = v.Name
+                    end
+                    game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(currentMagnet,"Range")
+                    game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(currentMagnet,"Power")
+                    game:GetService("ReplicatedStorage").Events.GameEvents.UpgradeMagnet:FireServer(currentMagnet,"Speed")
+                end
             end 
         end)
     end
@@ -459,40 +385,70 @@ local location1 = CFrame.new(813, 4, 485)
     function doAutoBuyMagnet()
         spawn(function()
             while _G.settingsTable.autobuymagnet == true do
-                local args = {
-                    [1] = _G.settingsTable.magnet_pref
-                }
-                
-                game:GetService("ReplicatedStorage").Events.GameEvents.BuyMagnet:FireServer(unpack(args))
-                wait(1)
+                while wait(1) do
+                    if not _G.settingsTable.autobuymagnet then break end
+                    for i, v in pairs(game:GetService("Workspace").MagnetShop.Magnets:GetChildren()) do
+                        game:GetService("ReplicatedStorage").Events.GameEvents.BuyMagnet:FireServer(v.Name) wait(.5)
+                    end
+                end
             end
         end)
     end
-    
-    print("-----Settings are------")
-    for i, v in pairs(_G.settingsTable) do
-        print(i, v)
+    function doCollectPowerUps()
+        spawn(function()
+            while _G.settingsTable.autopowerups == true do
+                while wait(0.5) do
+                    if not _G.settingsTable.autopowerups then break end
+                    for i, v in pairs(game:GetService("Workspace")["_PlayerPowerUps"][game.Players.LocalPlayer.Name]:GetChildren()) do
+                        for a, b in pairs(v:GetChildren()) do
+                            if b.Name == "TouchInterest" then
+                                firetouchinterest(plr,b.Parent,0) task.wait()
+                                firetouchinterest(plr,b.Parent,1)
+                            end
+                        end
+                    end
+                end
+            end
+        end)
     end
-    print("------END--------")
+    function doAutoEnchant()
+        spawn(function()
+            while _G.settingsTable.autoenchant == true do
+                while wait(2) do
+                    if not _G.settingsTable.autoenchant then break end
+                    for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Game.OpenableUi.Enchantments.Main.Top.Main:GetChildren()) do
+                        if v:IsA("Frame") then
+                            game:GetService("ReplicatedStorage").Events.GameEvents.UseEnchantment:InvokeServer(tonumber(v.Name))
+                        end
+                    end
+                end
+            end
+        end)
+    end
+    -- print("-----Settings are------")
+    -- for i, v in pairs(_G.settingsTable) do
+    --     print(i, v)
+    -- end
+    -- print("------END--------")
 
-    loadsettings()
-    if _G.settingsTable.autosell then
-        doSell1()
-    end
-    if _G.settingsTable.autoegg then
-        doEgg()
-    end
-    if _G.settingsTable.autodaily then
-        doDaily1()
-    end
-    if _G.settingsTable.autodailygroup then
-        doDailyGroup1()
-    end
-    print("-----Settings are------")
-    for i, v in pairs(_G.settingsTable) do
-        print(i, v)
-    end
-    print("------END--------")
+    -- loadsettings()
+    -- if _G.settingsTable.autosell then
+    --     doSell1()
+    -- end
+    -- if _G.settingsTable.autoegg then
+    --     doEgg()
+    -- end
+    -- if _G.settingsTable.autodaily then
+    --     doDaily1()
+    -- end
+    -- if _G.settingsTable.autodailygroup then
+    --     doDailyGroup1()
+    -- end
+    -- print("-----Settings are------")
+    -- for i, v in pairs(_G.settingsTable) do
+    --     print(i, v)
+    -- end
+    -- print("------END--------")
 
     s:Button("Clear Settings",function()
         _G.settingsTable.autosell = false
@@ -505,7 +461,6 @@ local location1 = CFrame.new(813, 4, 485)
         _G.settingsTable.autoupgrademagnetpower = nil
         _G.settingsTable.autoupgrademagnetrange = nil
         _G.settingsTable.magnet = nil
-        _G.settingsTable.magnet_pref = nil
         _G.settingsTable.autobuymagnet = nil
 
     end)
