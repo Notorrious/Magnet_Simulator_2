@@ -20,6 +20,7 @@ getgenv().anti_afk = true
 local world;
 local item;
 local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local sell = game:GetService("Workspace").Rings.Sellx25.Touch.TouchInterest
 local autoattack = game:GetService("Players").LocalPlayer.Gamepasses["Pet Auto Attack"]
 local Heaven = CFrame.new(2873, 4, 485.6)
 local hel = CFrame.new(2607, 4, 477)
@@ -37,7 +38,6 @@ local loc2 = CFrame.new(-749.623535, 1.93124998, 351.450165)
 local loc4 = CFrame.new(-681.882751, 1.93124998, 342.399292)
 local playerHead = game.Players.LocalPlayer.Character.Head
 local location1 = CFrame.new(813, 4, 485)
-if getgenv().Key == getgenv().KeyCode then
     local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
     local w = library:CreateWindow("Notorious Hub") -- Creates the window
@@ -228,7 +228,7 @@ if getgenv().Key == getgenv().KeyCode then
         wait(0.01)
         game:GetService("Players").LocalPLayer.AutoOpen.Value = true
         wait(0.01)
-        game:GetService("Players").LocalPLayer.AutoDelete.Value = true
+        game:GetService("Players").LocalPlayer.AutoDelete.Value = true
         wait(0.01)
     end)
     q:Button("The Heaven World",function()
@@ -304,14 +304,10 @@ if getgenv().Key == getgenv().KeyCode then
     function doSell1()
         spawn(function()
             while _G.settingsTable.autosell do
-                for i,v in pairs(game:GetService("Workspace").Rings.Sellx25:GetDescendants()) do
-                    if v.Name == "TouchInterest" then
-                        firetouchinterest(playerHead, v.Parent, 0)
-                        wait(0.1)
-                        firetouchinterest(playerHead, v.Parent, 1)
-                        wait()
-                    end
-                end
+                firetouchinterest(playerHead, sell.Parent, 0)
+                wait(0.1)
+                firetouchinterest(playerHead, sell.Parent, 1)
+                wait()
             end
         end)
     end
@@ -513,6 +509,3 @@ if getgenv().Key == getgenv().KeyCode then
         _G.settingsTable.autobuymagnet = nil
 
     end)
-else
-    print("Incorect key. Try again!")
-end
