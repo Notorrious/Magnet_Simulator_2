@@ -1,4 +1,4 @@
-if game.GameId == 8592863835 then
+
     _G.settingsTable = {
         autosell = false,
         autoegg = false,
@@ -465,4 +465,3 @@ if game.GameId == 8592863835 then
         _G.settingsTable.autobuymagnet = nil
 
     end)
-end
